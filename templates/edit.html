@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb ">
+        <li class="breadcrumb-item"><a href="{% url "index" %}">首页</a></li>
+        <li class="breadcrumb-item active">项目列表</li>
+        <li class="breadcrumb-item active">项目添加</li>
+    </ol>
+{% endblock %}
+
+{% block content-head %}
+
+{% endblock %}
+
+
+{% block content %}
+
+    <form action=""  method="post" novalidate>
+    {% csrf_token %}
+        {% for foo in it_form_obj %}
+            <label for="{{ item.id_for_label }}">{{ foo.label }}</label>
+            <div>
+                {{ foo }}
+            </div>
+            <div><span style="color: red;" >{{ foo.errors.0 }}</span></div>
+
+
+        {% endfor %}
+        <input type="submit" class="btn btn-success" value="提交">
+    </form>
+
+{% endblock %}

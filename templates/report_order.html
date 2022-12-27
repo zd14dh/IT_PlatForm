@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block breadcrumb %}
+    <ol class="breadcrumb ">
+        <li class="breadcrumb-item active"><a href="{% url "logs_list" %}" class="btn btn-default">返回上一页</a></li>
+        {#        <li class="breadcrumb-item active">项目列表</li>#}
+
+    </ol>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="card card-primary ">
+        <div class="card-header">
+            <h3 class="card-title">[{{ logs_data.log_run_time |date:"c" }}]创建的用力报告</h3>
+        </div>
+        <div class="card-body">
+            <div class="chart">
+                <div style="min-height: 650px;height: 100%;max-height: 450px;max-width: 100%;">
+                    {{ logs_data.log_report | safe }}
+                </div>
+            </div>
+            <div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="report_pk" value="{{ logs_data.pk }} " hidden>
+                    <input type="submit" class="btn btn-success" value="下载报告">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
